@@ -2,7 +2,7 @@
 Start-Transcript -path "C:\Users\Public\Documents\Remediate-Bitlocker.log" -force
 
 # Enable Bitlocker on drive C
-Enable-BitLocker -MountPoint "C:" -EncryptionMethod XtsAes128 -UsedSpaceOnly -SkipHardwareTest -RecoveryPasswordProtector
+Enable-BitLocker -MountPoint "C:" -EncryptionMethod XtsAes256 -UsedSpaceOnly -SkipHardwareTest -RecoveryPasswordProtector
 
 start-sleep 300
 
@@ -22,6 +22,21 @@ start-sleep 10
 
 # Gets the Bitlocker Status
 $bitlock = Get-BitLockerVolume -MountPoint 'C:' | select-object ProtectionStatus  | foreach { $_.ProtectionStatus }
+
+If ($bitlock -eq 'Off') {
+    manage-bde c: -on
+}
+
+start-sleep 300
+
+# Gets the Bitlocker Status
+$bitlock = Get-BitLockerVolume -MountPoint 'C:' | select-object ProtectionStatus  | foreach { $_.ProtectionStatus }
+
+If ($bitlock -eq 'Off') {
+    manage-bde c: -resume
+}
+
+start-sleep 300
 
 If ($bitlock -eq 'On') {
     write-host "Compliant"
