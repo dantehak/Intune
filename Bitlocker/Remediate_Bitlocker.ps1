@@ -1,3 +1,4 @@
+$ErrorActionPreference = 'SilentlyContinue'
 # Write Log File
 Start-Transcript -path "C:\Users\Public\Documents\Remediate-Bitlocker.log" -force
 
