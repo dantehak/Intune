@@ -1,6 +1,16 @@
 # Write Log File
 Start-Transcript -path "C:\Users\Public\Documents\Remediate-Bitlocker.log" -force
 
+# Disable Bitlocker on drive c
+
+Disable-BitLocker -mountpoint "C:"
+
+start-sleep 900
+
+Clear-BitLockerAutoUnlock
+
+start-sleep 60
+
 # Enable Bitlocker on drive C
 Enable-BitLocker -MountPoint "C:" -EncryptionMethod XtsAes128 -UsedSpaceOnly -SkipHardwareTest -RecoveryPasswordProtector
 
@@ -19,24 +29,6 @@ $key = "$($_.KeyProtectorId)"
 Manage-BDE -Protectors -AADBackup C: -ID "$key"
 
 start-sleep 10
-
-# Gets the Bitlocker Status
-$bitlock = Get-BitLockerVolume -MountPoint 'C:' | select-object ProtectionStatus  | foreach { $_.ProtectionStatus }
-
-If ($bitlock -eq 'Off') {
-    manage-bde c: -on
-}
-
-start-sleep 300
-
-# Gets the Bitlocker Status
-$bitlock = Get-BitLockerVolume -MountPoint 'C:' | select-object ProtectionStatus  | foreach { $_.ProtectionStatus }
-
-If ($bitlock -eq 'Off') {
-    manage-bde c: -resume
-}
-
-start-sleep 300
 
 # Gets the Bitlocker Status
 $bitlock = Get-BitLockerVolume -MountPoint 'C:' | select-object ProtectionStatus  | foreach { $_.ProtectionStatus }
