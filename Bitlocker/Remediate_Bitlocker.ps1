@@ -1,5 +1,5 @@
 # Write Log File
-Start-Transcript -path "C:\Users\Public\Documents\Remediate-Bitlocker.log" -append
+Start-Transcript -path "C:\Users\Public\Documents\Remediate-Bitlocker.log" -force
 
 # Enable Bitlocker on drive C
 Enable-BitLocker -MountPoint "C:" -EncryptionMethod XtsAes128 -UsedSpaceOnly -SkipHardwareTest -RecoveryPasswordProtector
