@@ -4,7 +4,7 @@ Start-Transcript -path "C:\Users\Public\Documents\Remediate-Bitlocker.log" -appe
 # Enable Bitlocker on drive C
 Enable-BitLocker -MountPoint "C:" -EncryptionMethod XtsAes128 -UsedSpaceOnly -SkipHardwareTest -RecoveryPasswordProtector
 
-start-sleep 30
+start-sleep 300
 
 # Backup Bitlocker key to Azure AD
 
@@ -18,7 +18,7 @@ $key = "$($_.KeyProtectorId)"
 
 Manage-BDE -Protectors -AADBackup C: -ID "$key"
 
-start-sleep 300
+start-sleep 10
 
 # Gets the Bitlocker Status
 $bitlock = Get-BitLockerVolume -MountPoint 'C:' | select-object ProtectionStatus  | foreach { $_.ProtectionStatus }
