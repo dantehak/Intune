@@ -8,10 +8,6 @@ Disable-BitLocker -mountpoint "C:"
 
 start-sleep 900
 
-Clear-Tpm
-
-start-sleep 60
-
 # Enable Bitlocker on drive C
 Enable-BitLocker -MountPoint "C:" -EncryptionMethod XtsAes128 -UsedSpaceOnly -SkipHardwareTest -RecoveryPasswordProtector
 
