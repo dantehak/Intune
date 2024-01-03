@@ -7,7 +7,7 @@ Disable-BitLocker -mountpoint "C:"
 
 start-sleep 900
 
-Clear-BitLockerAutoUnlock
+Clear-Tpm
 
 start-sleep 60
 
