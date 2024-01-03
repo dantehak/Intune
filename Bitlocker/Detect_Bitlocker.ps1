@@ -1,5 +1,5 @@
 # Write Log File
-Start-Transcript -path "C:\Users\Public\Documents\Detect-Bitlocker.log" -append
+Start-Transcript -path "C:\Users\Public\Documents\Detect-Bitlocker.log" -force
 
 # Gets the Bitlocker Status
 $bitlock = Get-BitLockerVolume -MountPoint 'C:' | select-object ProtectionStatus  | foreach { $_.ProtectionStatus }
