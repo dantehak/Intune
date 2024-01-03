@@ -1,3 +1,6 @@
+# Write Log File
+Start-Transcript -path "C:\Users\Public\Documents\Remediate-Bitlocker.log" -append
+
 # Enable Bitlocker on drive C
 Enable-BitLocker -MountPoint "C:" -EncryptionMethod XtsAes128 -UsedSpaceOnly -SkipHardwareTest -RecoveryPasswordProtector
 
@@ -32,3 +35,4 @@ If ($bitlock -eq 'On') {
     write-host "Error in script"
      exit 0
     }
+Stop-Transcript
