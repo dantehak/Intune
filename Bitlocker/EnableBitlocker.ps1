@@ -24,13 +24,11 @@ If ($bitlock -eq 'On') {
     write-host "Compliant"
     # exit 0	
 }
- 
-If ($bitlock -eq 'Off') {
+ If ($bitlock -eq 'Off') {
     write-host "Non-Compliant"
     # exit 1	
 }
- 
-else {
+ else {
     write-host "Error in script"
     # exit 0
     }
