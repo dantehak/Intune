@@ -1,0 +1,30 @@
+# Enable Bitlocker on drive C
+Enable-BitLocker -MountPoint "C:" -EncryptionMethod XtsAes128 -UsedSpaceOnly -SkipHardwareTest -RecoveryPasswordProtector
+
+start-sleep 30
+
+# Backup Bitlocker key to Azure AD
+
+(Get-BitLockerVolume -MountPoint $volume.MountPoint).KeyProtector | 
+Where-Object { 
+$_.KeyProtectorType -eq 'RecoveryPassword' 
+} | 
+Foreach-Object { 
+$key = "$($_.KeyProtectorId)"
+}
+
+Manage-BDE -Protectors -AADBackup C: -ID "$key"
+
+start-sleep 300
+
+# Gets the Bitlocker Status
+$bitlock = Get-BitLockerVolume -MountPoint 'C:' | select-object ProtectionStatus  | foreach { $_.ProtectionStatus }
+
+If ($bitlock -eq 'On') {
+    write-host "Compliant"
+    exit 0	
+}
+else {
+    write-host "Non-Compliant"
+    exit 1
+    }
