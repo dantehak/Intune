@@ -11,7 +11,7 @@ start-sleep 900
 # Enable Bitlocker on drive C
 Enable-BitLocker -MountPoint "C:" -EncryptionMethod XtsAes128 -UsedSpaceOnly -SkipHardwareTest -RecoveryPasswordProtector
 
-start-sleep 300
+start-sleep 900
 
 # Backup Bitlocker key to Azure AD
 
