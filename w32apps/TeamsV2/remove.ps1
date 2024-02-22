@@ -1,0 +1,1 @@
+﻿Get-AppxPackage | where-object {$_.name -like "*MSTeams*"} | Remove-AppxPackage
