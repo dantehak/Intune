@@ -1,7 +1,7 @@
 @echo off
 
 REM Install the EXE Cloud Print Software File
-start "" "%~dp0cloudprintscan_kde-prod_1.10.06610.1.exe" -s -on "stageentertainment"
+start "" "%~dp0cloudprintscan_kde-prod_1.10.06610.1.exe" -s -on "Enter Company Name Here"
 
 timeout /t 120 /nobreak >nul
 
